@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+/* ──────────────────────────────────────────────────────────────────────────
+   zimFDMS brand palette — refined.
+   The "red" leans burgundy at the deep end so the brand reads as
+   institutional (ZIMRA-adjacent) rather than alarm-red.
+   ────────────────────────────────────────────────────────────────────────── */
+@theme {
+  /* Burgundy-red — primary brand */
+  --color-zim-red-50:  #FCF3F4;
+  --color-zim-red-100: #F9E1E3;
+  --color-zim-red-200: #F0B9BF;
+  --color-zim-red-300: #E08B93;
+  --color-zim-red-400: #CB5B65;
+  --color-zim-red-500: #B23241;
+  --color-zim-red-600: #9C1C2A;   /* DEFAULT — depth */
+  --color-zim-red-700: #7E1622;
+  --color-zim-red-800: #62121C;
+  --color-zim-red-900: #4A0E16;
+  --color-zim-red-950: #2A0709;
+
+  /* Champagne gold — secondary accent */
+  --color-zim-gold-50:  #FFFCEC;
+  --color-zim-gold-100: #FEF5C7;
+  --color-zim-gold-200: #FCE790;
+  --color-zim-gold-300: #F9D451;
+  --color-zim-gold-400: #F1BB1E;
+  --color-zim-gold-500: #D89A00;
+  --color-zim-gold-600: #B07A00;
+  --color-zim-gold-700: #8A5E00;
+  --color-zim-gold-800: #654400;
+  --color-zim-gold-900: #4A3100;
+  --color-zim-gold-950: #2C1D00;
+
+  /* Slate ink — text + UI base */
+  --color-zim-ink-50:   #F8FAFC;
+  --color-zim-ink-100:  #F1F5F9;
+  --color-zim-ink-200:  #E2E8F0;
+  --color-zim-ink-300:  #CBD5E1;
+  --color-zim-ink-400:  #94A3B8;
+  --color-zim-ink-500:  #64748B;
+  --color-zim-ink-600:  #475569;
+  --color-zim-ink-700:  #334155;
+  --color-zim-ink-800:  #1E293B;
+  --color-zim-ink-900:  #0F172A;
+  --color-zim-ink-950:  #020617;
+
+  /* Sand — warm off-white for hero / soft backgrounds */
+  --color-zim-sand-50:  #FBF8F3;
+  --color-zim-sand-100: #F5EFE5;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 8px 24px -8px rgb(15 23 42 / 0.08);
+  --shadow-card-hover: 0 1px 2px rgb(15 23 42 / 0.04), 0 18px 36px -12px rgb(156 28 42 / 0.18);
+}
+
+html, body, #root { height: 100%; }
+body {
+  font-family: var(--font-sans);
+  background: white;
+  color: var(--color-zim-ink-900);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Utility components ─────────────────────────────────────────────────── */
+.container-page { @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8; }
+
+.input {
+  @apply block w-full rounded-lg border border-zim-ink-200 bg-white px-3.5 py-2.5 text-sm
+         placeholder:text-zim-ink-400 transition focus:border-zim-red-500
+         focus:outline-none focus:ring-4 focus:ring-zim-red-500/15;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg
+         bg-gradient-to-b from-zim-red-600 to-zim-red-700
+         px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition
+         hover:from-zim-red-700 hover:to-zim-red-800 hover:shadow-md
+         disabled:cursor-not-allowed disabled:opacity-50;
+}
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg border border-zim-ink-200
+         bg-white px-5 py-2.5 text-sm font-semibold text-zim-ink-700 transition
+         hover:border-zim-red-300 hover:bg-zim-red-50 hover:text-zim-red-700 disabled:opacity-50;
+}
+.btn-gold {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg
+         bg-gradient-to-b from-zim-gold-400 to-zim-gold-500
+         px-5 py-2.5 text-sm font-bold text-zim-ink-900 shadow-sm transition
+         hover:from-zim-gold-300 hover:to-zim-gold-400 hover:shadow-md;
+}
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium
+         text-zim-ink-600 transition hover:bg-zim-ink-100 hover:text-zim-ink-900;
+}
+.label { @apply mb-1.5 block text-sm font-medium text-zim-ink-700; }
+
+.card {
+  @apply rounded-2xl border border-zim-ink-200 bg-white;
+  box-shadow: var(--shadow-card);
+}
+.card-hover {
+  @apply transition;
+  &:hover { box-shadow: var(--shadow-card-hover); }
+}
+
+.kbd { @apply inline-flex items-center rounded border border-zim-ink-200 bg-zim-ink-50 px-1.5 py-0.5 font-mono text-[11px] text-zim-ink-700; }
+.chip { @apply inline-flex items-center gap-1.5 rounded-full bg-zim-red-50 px-3 py-1 text-xs font-semibold text-zim-red-700 ring-1 ring-zim-red-100; }
+
+/* Hero backdrop — warm sand gradient with two soft brand halos */
+.hero-grad {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(156, 28, 42, 0.10), transparent 55%),
+    radial-gradient(circle at 86% 24%, rgba(216, 154, 0, 0.10), transparent 55%),
+    linear-gradient(to bottom, #FBF8F3 0%, #FFFFFF 70%);
+}
+.hero-grad-deep {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(156, 28, 42, 0.20), transparent 65%),
+    linear-gradient(to bottom, #FBF8F3, white);
+}
+
+/* Subtle paper texture for receipt mockup */
+.receipt-paper {
+  background-color: #FDFCFA;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(15, 23, 42, 0.015) 0 1px, transparent 1px 28px);
+}
+
+/* Lifecycle flowing dot animation */
+@keyframes lifecycle-orbit {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.lifecycle-orbit {
+  animation: lifecycle-orbit 14s linear infinite;
+  transform-origin: center;
+}
+.lifecycle-orbit-fast {
+  animation: lifecycle-orbit 9s linear infinite;
+  transform-origin: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lifecycle-orbit, .lifecycle-orbit-fast { animation: none; }
+}
+
+/* Sticky-note style code blocks */
+.codebox {
+  @apply overflow-x-auto rounded-xl bg-zim-ink-900 p-4 text-[12.5px] leading-relaxed text-zim-ink-50;
+  font-family: var(--font-mono);
+}
