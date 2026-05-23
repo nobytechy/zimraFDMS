@@ -18,6 +18,7 @@ import FDMSPipeline from '@/components/pos/FDMSPipeline'
 import ZReportModal from '@/components/pos/ZReportModal'
 import PrintedReceiptToast from '@/components/pos/PrintedReceiptToast'
 import FiscalReceiptCard from '@/components/FiscalReceiptCard'
+import Seo from '@/components/Seo'
 
 const DEVICE_ID = 1042
 
@@ -180,6 +181,11 @@ export default function Sandbox() {
 
   return (
     <div className="min-h-screen bg-zim-sand-50">
+      <Seo
+        title="Interactive POS sandbox"
+        description="Run a full ZIMRA fiscalisation lifecycle in your browser — open the till, sell products, watch each receipt get signed and submitted to FDMS, close the day, see the Z report. No signup, no ZIMRA account."
+        path="/sandbox"
+      />
       <PrintedReceiptToast show={!!lastPrint} ref={lastPrint?.ref} qrUrl={lastPrint?.qrUrl}/>
 
       <ZReportModal

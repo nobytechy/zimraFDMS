@@ -9,6 +9,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import { Search, ShieldCheck, AlertTriangle, ArrowRight, Receipt, CheckCircle2 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { verifyReceipt } from '@/lib/fdms/merchantService'
+import Seo from '@/components/Seo'
 
 export default function Verify() {
   const { ref } = useParams()
@@ -37,6 +38,11 @@ export default function Verify() {
 
   return (
     <div className="min-h-screen bg-zim-sand-50">
+      <Seo
+        title={ref ? `Verify receipt ${ref}` : 'Verify a fiscalised receipt'}
+        description="Paste an invoice number from any zimFDMS-fiscalised receipt to verify it's genuine — see the FDMS signature stamp, line items, taxes and total."
+        path={ref ? `/verify/${ref}` : '/verify'}
+      />
       <section className="hero-grad">
         <div className="container-page py-14 md:py-20 text-center">
           <span className="chip">Receipt verification</span>

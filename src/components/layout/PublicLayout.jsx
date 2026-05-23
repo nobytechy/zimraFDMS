@@ -2,6 +2,8 @@ import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { Menu, X, ArrowRight, LayoutDashboard, LogOut } from 'lucide-react'
 import { useState } from 'react'
 import Logo from '@/components/Logo'
+import ScrollProgress from '@/components/ScrollProgress'
+import BackToTop from '@/components/BackToTop'
 import { useAuth } from '@/context/AuthContext'
 import { cn } from '@/lib/utils'
 
@@ -23,6 +25,9 @@ export default function PublicLayout() {
 
   return (
     <div className="min-h-screen bg-white text-zim-ink-900">
+      {/* Scroll progress bar (fixed, very top) */}
+      <ScrollProgress />
+
       {/* Top strip */}
       <div className="bg-zim-ink-900 text-zim-ink-50">
         <div className="container-page flex flex-wrap items-center justify-between gap-2 py-1.5 text-[11px]">
@@ -91,6 +96,9 @@ export default function PublicLayout() {
       </header>
 
       <main><Outlet /></main>
+
+      {/* Floating back-to-top */}
+      <BackToTop />
 
       {/* Footer — deep gradient that blends seamlessly from the CTA strip above */}
       <footer className="relative isolate overflow-hidden text-zim-ink-100">

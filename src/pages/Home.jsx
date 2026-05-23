@@ -6,12 +6,18 @@ import FiscalReceiptCard from '@/components/FiscalReceiptCard'
 import FAQ from '@/components/FAQ'
 import TechMarquee from '@/components/TechMarquee'
 import PosPreview from '@/components/PosPreview'
+import Seo from '@/components/Seo'
 
 const fadeUp = { hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 0.9, 0.32, 1] } } }
 
 export default function Home() {
   return (
     <div>
+      <Seo
+        title=""
+        description="A bridge service that connects Zimbabwean POS systems, e-commerce stores and accounting apps to ZIMRA's Fiscal Device Management System. Handles signature math, certificates, fiscal days and Z reports. v7.2 compliant. Built by Noby Tebulo."
+        path="/"
+      />
       {/* ── Hero ─────────────────────────────────────────────────────── */}
       <section className="hero-grad">
         <div className="container-page grid items-center gap-10 py-14 md:grid-cols-[1.05fr_1fr] md:py-20">

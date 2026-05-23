@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, FileSignature, Lock, Wifi, WifiOff } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LifecycleCircle, { STAGES } from '@/components/LifecycleCircle'
+import Seo from '@/components/Seo'
 
 const STAGE_COPY = {
   register: {
@@ -68,6 +69,11 @@ export default function HowItWorks() {
   const copy = STAGE_COPY[active]
   return (
     <div className="bg-white">
+      <Seo
+        title="How FDMS actually works"
+        description="Plain-English walkthrough of ZIMRA's Fiscal Device Management System — register device, open fiscal day, sign receipts, close day, generate Z reports. With diagrams + code snippets."
+        path="/how-it-works"
+      />
       {/* Hero */}
       <section className="hero-grad">
         <div className="container-page py-14 md:py-20">

@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"  stop-color="#FBF8F3"/>
+      <stop offset="100%" stop-color="#FCDCDF"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#9C1C2A"/>
+      <stop offset="100%" stop-color="#D89A00"/>
+    </linearGradient>
+    <radialGradient id="halo-l" cx="0.2" cy="0.4" r="0.5">
+      <stop offset="0%"  stop-color="rgba(156,28,42,0.30)"/>
+      <stop offset="100%" stop-color="rgba(156,28,42,0)"/>
+    </radialGradient>
+    <radialGradient id="halo-r" cx="0.85" cy="0.7" r="0.5">
+      <stop offset="0%"  stop-color="rgba(216,154,0,0.30)"/>
+      <stop offset="100%" stop-color="rgba(216,154,0,0)"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#halo-l)"/>
+  <rect width="1200" height="630" fill="url(#halo-r)"/>
+
+  <!-- Logo mark -->
+  <g transform="translate(80, 80)">
+    <rect width="96" height="96" rx="22" fill="url(#brand)"/>
+    <path d="M27 27 H69 V37 L39 58.5 H69 V69 H27 V58.5 L57 37 H27 Z" fill="white"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(195, 110)" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+    <text x="0" y="0" font-size="34" font-weight="800" fill="#0F172A">zim<tspan fill="#9C1C2A">FDMS</tspan></text>
+    <text x="0" y="34" font-size="18" font-weight="500" fill="#475569">ZIMRA Fiscalisation Bridge</text>
+  </g>
+
+  <!-- Headline -->
+  <g transform="translate(80, 268)" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#0F172A">
+    <text x="0" y="0"  font-size="68" font-weight="800">ZIMRA fiscalisation,</text>
+    <text x="0" y="78" font-size="68" font-weight="800" fill="#9C1C2A">without the headache.</text>
+  </g>
+
+  <!-- Subhead -->
+  <text x="80" y="430" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" font-weight="400" fill="#334155">
+    POS · e-commerce · accounting · one API. Spec-correct v7.2.
+  </text>
+
+  <!-- Feature chips -->
+  <g transform="translate(80, 465)" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600">
+    <g>
+      <rect x="0" y="0" width="178" height="36" rx="18" fill="white" stroke="#E2E8F0"/>
+      <text x="20" y="23" fill="#475569">🇿🇼  Built in Harare</text>
+    </g>
+    <g transform="translate(192, 0)">
+      <rect x="0" y="0" width="170" height="36" rx="18" fill="white" stroke="#E2E8F0"/>
+      <text x="20" y="23" fill="#475569">⚙  v7.2 compliant</text>
+    </g>
+    <g transform="translate(374, 0)">
+      <rect x="0" y="0" width="206" height="36" rx="18" fill="white" stroke="#E2E8F0"/>
+      <text x="20" y="23" fill="#475569">🔐  Spec-correct crypto</text>
+    </g>
+    <g transform="translate(592, 0)">
+      <rect x="0" y="0" width="174" height="36" rx="18" fill="white" stroke="#E2E8F0"/>
+      <text x="20" y="23" fill="#475569">🧾  QR-verifiable</text>
+    </g>
+  </g>
+
+  <!-- Developer attribution band (bottom) -->
+  <rect x="0" y="565" width="1200" height="65" fill="#0F172A"/>
+  <g transform="translate(80, 600)" font-family="ui-sans-serif, system-ui, sans-serif">
+    <text x="0" y="0" font-size="16" font-weight="600" fill="#F4B400">
+      Built by Noby Tebulo
+    </text>
+    <text x="200" y="0" font-size="14" font-weight="400" fill="#94A3B8">
+      Full-stack developer · Harare, Zimbabwe · nobie.netlify.app
+    </text>
+  </g>
+</svg>

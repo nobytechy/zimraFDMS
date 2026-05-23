@@ -2,10 +2,16 @@
  * Auth + settings context.
  *
  *  - Merchants sign up with Full name, Phone (+263), Password.
- *    Auth uses Supabase Auth with a synthesised email `phone-{normalised}@zimfdms.local`
- *    so we don't need to enable Twilio/Vonage during demo.
- *  - Super-admin is a separate auth surface, PIN-only, email = `admin@zimfdms.local`.
- *    The admin role is granted by the merchant row's `is_admin` flag.
+ *    Supabase Auth requires a real public TLD — we synthesise
+ *    `phone-{normalised}@zimfdms.app` (it's an addressable real TLD; we don't
+ *    actually own the domain, but Supabase only validates the format, not
+ *    the deliverability, and we never send mail to these addresses).
+ *  - Super-admin is a separate auth surface, PIN-only, email = `admin@zimfdms.app`.
+ *
+ *  IMPORTANT — if you created an admin user earlier with `admin@zimfdms.local`,
+ *  rename it in Supabase → Auth → Users to `admin@zimfdms.app`. The .local TLD
+ *  is rejected by Supabase Auth's signup validator (RFC 6762 reserves .local
+ *  for mDNS), even though it works for users created manually via dashboard.
  */
 import { createContext, useContext, useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
@@ -13,8 +19,8 @@ import { normalisePhone } from '@/lib/utils'
 
 const AuthContext = createContext(null)
 
-const phoneToEmail = (phone) => `phone-${normalisePhone(phone).replace('+', '')}@zimfdms.local`
-const ADMIN_EMAIL = 'admin@zimfdms.local'
+const phoneToEmail = (phone) => `phone-${normalisePhone(phone).replace('+', '')}@zimfdms.app`
+const ADMIN_EMAIL = 'admin@zimfdms.app'
 
 export function AuthProvider({ children }) {
   const [session, setSession] = useState(null)

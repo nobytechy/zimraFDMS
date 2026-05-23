@@ -127,7 +127,7 @@ alter table public.fdms_webhooks          enable row level security;
 
 -- Helper: is the current jwt the admin email?
 create or replace function public.fdms_is_admin() returns boolean as $$
-  select (auth.jwt() ->> 'email') = 'admin@zimfdms.local'
+  select (auth.jwt() ->> 'email') = 'admin@zimfdms.app'
 $$ language sql stable;
 
 -- Merchants can read + update their own row
@@ -165,13 +165,13 @@ create policy "platform settings admin" on public.fdms_platform_settings
 -- DEMO ADMIN BOOTSTRAP
 -- After running this script:
 --   1. Supabase → Auth → Users → Add user
---        email:    admin@zimfdms.local
+--        email:    admin@zimfdms.app
 --        password: 1975              (PIN — change later)
 --        auto-confirm: yes
 --   2. Link the auth user to a merchant row marked as admin:
 --        insert into public.fdms_merchants (user_id, full_name, phone, is_admin)
 --          select id, 'zimFDMS Admin', '+263000000000', true
---          from auth.users where email = 'admin@zimfdms.local';
+--          from auth.users where email = 'admin@zimfdms.app';
 -- ============================================================================
 
 select 'zimFDMS schema applied' as status, now() as at;

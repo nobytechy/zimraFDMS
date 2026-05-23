@@ -2,11 +2,145 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#B7202E" />
-    <meta name="description" content="zimFDMS — fiscalise receipts to ZIMRA without the headache. Bridge service, dashboard, SDKs and a WordPress plugin for the Zimbabwean Fiscalisation Data Management System." />
-    <title>zimFDMS — ZIMRA fiscalisation, made simple.</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- ─── Core SEO ──────────────────────────────────────────────────── -->
+    <title>zimFDMS — ZIMRA Fiscalisation Bridge for Zimbabwean Businesses</title>
+    <meta name="description" content="Connect your POS, e-commerce store or accounting app to ZIMRA's Fiscal Device Management System (FDMS) without the headache. zimFDMS handles signature math, certificates, fiscal days and Z reports. v7.2 compliant." />
+    <meta name="keywords" content="ZIMRA FDMS, Zimbabwe fiscalisation, fiscal device, ZIMRA API, fiscal receipt Zimbabwe, ZIMRA invoice verification, ZIMRA POS, Fiscal Device Gateway, ZWL fiscal device, VAT Zimbabwe, ZIMRA v7.2, WooCommerce ZIMRA, ZIMRA Z report, EcoCash POS, fiscalise receipt" />
+    <meta name="author" content="Noby Tebulo" />
+    <meta name="creator" content="Noby Tebulo · https://nobie.netlify.app" />
+    <meta name="publisher" content="Noby Tebulo" />
+    <meta name="copyright" content="© Noby Tebulo" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="geo.region" content="ZW" />
+    <meta name="geo.country" content="ZW" />
+    <meta name="geo.placename" content="Harare, Zimbabwe" />
+    <meta name="theme-color" content="#9C1C2A" />
+    <meta name="color-scheme" content="light" />
+    <link rel="canonical" href="https://zimrafdms.netlify.app/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- ─── Open Graph (Facebook, LinkedIn, WhatsApp previews) ────────── -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="zimFDMS" />
+    <meta property="og:url" content="https://zimrafdms.netlify.app/" />
+    <meta property="og:title" content="zimFDMS — ZIMRA Fiscalisation, Without the Headache" />
+    <meta property="og:description" content="A bridge service that handles ZIMRA FDMS for Zimbabwean businesses. POS, e-commerce store or accounting system → fiscalised receipts in one API call. v7.2 compliant." />
+    <meta property="og:image" content="https://zimrafdms.netlify.app/og-image.svg" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="zimFDMS — ZIMRA fiscalisation bridge service" />
+    <meta property="og:locale" content="en_ZW" />
+    <meta property="article:author" content="Noby Tebulo" />
+
+    <!-- ─── Twitter / X cards ─────────────────────────────────────────── -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://zimrafdms.netlify.app/" />
+    <meta name="twitter:title" content="zimFDMS — ZIMRA Fiscalisation Bridge" />
+    <meta name="twitter:description" content="Connect your POS to ZIMRA's FDMS without the headache. v7.2 compliant. Built by Noby Tebulo." />
+    <meta name="twitter:image" content="https://zimrafdms.netlify.app/og-image.svg" />
+    <meta name="twitter:image:alt" content="zimFDMS — ZIMRA fiscalisation bridge service" />
+    <meta name="twitter:creator" content="@nobytechy" />
+    <meta name="twitter:site" content="@nobytechy" />
+
+    <!-- ─── Structured data (JSON-LD) ─────────────────────────────────── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://zimrafdms.netlify.app/#software",
+          "name": "zimFDMS",
+          "alternateName": "ZIMRA FDMS Bridge",
+          "url": "https://zimrafdms.netlify.app/",
+          "description": "A bridge service that connects Zimbabwean POS systems, e-commerce stores and accounting apps to ZIMRA's Fiscal Device Management System. Implements the Fiscal Device Gateway API v7.2 specification.",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web, iOS, Android",
+          "softwareVersion": "1.0",
+          "inLanguage": "en-ZW",
+          "audience": {
+            "@type": "Audience",
+            "audienceType": "Zimbabwean businesses, developers integrating with ZIMRA"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "description": "Free sandbox + free starter tier during early access"
+          },
+          "featureList": [
+            "ZIMRA FDMS v7.2 signature math (SHA-256 + ECDSA secp256r1)",
+            "Fiscal day state machine",
+            "QR code receipt verification",
+            "Online + Offline communication modes",
+            "REST API + Node / PHP SDKs",
+            "WordPress / WooCommerce plugin",
+            "Z reports + Z report verification"
+          ],
+          "creator": { "@id": "https://nobie.netlify.app/#person" },
+          "publisher": { "@id": "https://nobie.netlify.app/#person" }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://nobie.netlify.app/#person",
+          "name": "Noby Tebulo",
+          "alternateName": "Noby",
+          "url": "https://nobie.netlify.app",
+          "image": "https://nobie.netlify.app/favicon.svg",
+          "jobTitle": "Full-Stack Software Developer",
+          "description": "Full-stack software developer based in Harare, Zimbabwe. Specialises in payment integrations, multi-tenant SaaS and AI-integrated products.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Harare",
+            "addressCountry": "ZW"
+          },
+          "email": "mailto:nobytechy@gmail.com",
+          "telephone": "+263774603865",
+          "sameAs": [
+            "https://nobie.netlify.app",
+            "https://github.com/nobytechy",
+            "https://linkedin.com/in/nobytechy"
+          ],
+          "knowsAbout": [
+            "ZIMRA FDMS", "PayNow Zimbabwe", "EcoCash integration",
+            "React", "Node.js", "PHP", "Laravel", "Python",
+            "Supabase", "PostgreSQL", "Web Crypto",
+            "Anthropic Claude API", "AI integration"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://zimrafdms.netlify.app/#website",
+          "url": "https://zimrafdms.netlify.app/",
+          "name": "zimFDMS",
+          "description": "ZIMRA fiscalisation bridge service",
+          "publisher": { "@id": "https://nobie.netlify.app/#person" },
+          "inLanguage": "en-ZW"
+        }
+      ]
+    }
+    </script>
+
+    <!-- ─── Quiet developer attribution (visible in source) ───────────── -->
+    <!--
+      ┌──────────────────────────────────────────────────────────────────┐
+      │  zimFDMS · ZIMRA Fiscalisation Bridge Service                    │
+      │  Designed and built by Noby Tebulo                               │
+      │  https://nobie.netlify.app  ·  nobytechy@gmail.com               │
+      │  +263 774 603 865                                                │
+      │                                                                  │
+      │  Hi, fellow developer! 👋                                        │
+      │  If you're reading this, you're looking at the work.             │
+      │  Available for full-stack and AI-integration contracts.          │
+      └──────────────────────────────────────────────────────────────────┘
+    -->
   </head>
   <body>
     <div id="root"></div>
