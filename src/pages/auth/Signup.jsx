@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import { ArrowRight, Eye, EyeOff } from 'lucide-react'
+import { ArrowRight, ArrowLeft, Eye, EyeOff } from 'lucide-react'
 import { useAuth } from '@/context/AuthContext'
 import { phoneIsValid, normalisePhone } from '@/lib/utils'
 import Logo from '@/components/Logo'
@@ -33,7 +33,10 @@ export default function Signup() {
   return (
     <div className="min-h-screen bg-zim-ink-50 grid place-items-center px-4 py-12">
       <div className="w-full max-w-md">
-        <Link to="/" className="mb-6 inline-flex"><Logo /></Link>
+        <Link to="/" className="mb-4 inline-flex items-center gap-1 text-sm font-medium text-zim-ink-500 hover:text-zim-ink-900">
+          <ArrowLeft size={15} /> Back to site
+        </Link>
+        <Link to="/" className="mb-6 flex"><Logo /></Link>
         <div className="rounded-2xl border border-zim-ink-200 bg-white p-7 shadow-sm">
           <h1 className="text-2xl font-bold tracking-tight text-zim-ink-900">Create your merchant account</h1>
           <p className="mt-1 text-sm text-zim-ink-500">Phone-based signup. SMS verification will be added shortly.</p>

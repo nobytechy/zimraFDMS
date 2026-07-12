@@ -1,9 +1,24 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, FileSignature, Lock, Wifi, WifiOff } from 'lucide-react'
+import { ArrowRight, FileSignature, Lock, Wifi, WifiOff, HelpCircle, BookOpen } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LifecycleCircle, { STAGES } from '@/components/LifecycleCircle'
+import IntegrateCTA from '@/components/IntegrateCTA'
 import Seo from '@/components/Seo'
+
+// Plain-English glossary — the terms ZIMRA uses, defined for someone who has
+// never touched fiscalisation. Sourced from the FDMS API v7.2 spec (§1.1).
+const GLOSSARY = [
+  ['Fiscalisation', 'Recording every sale electronically and sending it to ZIMRA — by law, for VAT-registered businesses in Zimbabwe.'],
+  ['FDMS', 'Fiscalisation Data Management System — ZIMRA’s backend that receives, controls and monitors those sales and produces tax reports.'],
+  ['Fiscal device', 'The hardware or software that records sales (issues fiscal invoices, debit & credit notes) and submits them to FDMS. zimFDMS is a software fiscal device.'],
+  ['Device ID & Activation Key', 'Issued by ZIMRA when you register a device on their portal. You need both once, to link the device to FDMS.'],
+  ['Fiscal day', 'A trading day on the device. You open it, submit receipts against it all day, then close it with a signed summary.'],
+  ['Receipt', 'The umbrella term for a fiscal invoice, debit note or credit note.'],
+  ['Device signature', 'A cryptographic signature the device adds to each receipt before sending it — proof it wasn’t tampered with.'],
+  ['FDMS signature', 'ZIMRA’s own counter-signature, added after it accepts the receipt.'],
+  ['QR code', 'Printed on every receipt. Anyone can scan it to verify the receipt is genuine on ZIMRA’s portal.'],
+]
 
 const STAGE_COPY = {
   register: {
@@ -88,6 +103,31 @@ export default function HowItWorks() {
         </div>
       </section>
 
+      {/* Plain-English primer — for people brand new to fiscalisation */}
+      <section className="container-page py-12">
+        <div className="rounded-2xl border border-zim-ink-200 bg-zim-ink-50 p-6 md:p-8">
+          <div className="flex items-center gap-2 text-zim-red-700">
+            <HelpCircle size={18} />
+            <p className="text-xs font-semibold uppercase tracking-wider">Never done this before? Start here</p>
+          </div>
+          <h2 className="mt-2 text-2xl font-bold tracking-tight text-zim-ink-900">Fiscalisation, in one paragraph</h2>
+          <p className="mt-3 max-w-3xl text-zim-ink-700">
+            In Zimbabwe, VAT-registered businesses must record <strong>every sale electronically</strong> and send it
+            to ZIMRA in real time — that’s “fiscalisation”. Each sale becomes a <strong>fiscal receipt</strong> with a
+            QR code the customer can scan to prove it’s genuine. To do it, a device registers with ZIMRA once, then
+            each trading day it <strong>opens a fiscal day</strong>, <strong>signs &amp; submits every receipt</strong>,
+            and <strong>closes the day</strong> with a signed summary. The catch: ZIMRA’s FDMS API is strict —
+            certificates, exact signature maths, a day “state machine”. <strong>zimFDMS does all of that for you</strong>,
+            so you only ever send a simple sale.
+          </p>
+          <div className="mt-4 grid gap-3 sm:grid-cols-3">
+            <MiniFact k="Who needs it?" v="VAT-registered businesses trading in Zimbabwe." />
+            <MiniFact k="Why?" v="It stops under-declaring sales and lets any customer verify a receipt." />
+            <MiniFact k="What’s hard?" v="The FDMS API v7.2 — certs, signatures, fiscal-day rules. We handle it." />
+          </div>
+        </div>
+      </section>
+
       {/* Lifecycle picker */}
       <section className="container-page py-12">
         <div className="grid items-start gap-10 lg:grid-cols-[480px_1fr]">
@@ -169,6 +209,41 @@ export default function HowItWorks() {
           </div>
         </div>
       </section>
+
+      {/* Glossary — every ZIMRA term, in plain English */}
+      <section className="bg-zim-ink-50 py-14">
+        <div className="container-page">
+          <div className="flex items-center gap-2 text-zim-red-700">
+            <BookOpen size={18} />
+            <p className="text-xs font-semibold uppercase tracking-wider">The words ZIMRA uses</p>
+          </div>
+          <h2 className="mt-1 text-3xl font-bold tracking-tight text-zim-ink-900">Fiscalisation glossary</h2>
+          <p className="mt-2 max-w-2xl text-zim-ink-600">Straight from the FDMS API v7.2 spec — decoded for humans.</p>
+          <dl className="mt-6 grid gap-4 md:grid-cols-2">
+            {GLOSSARY.map(([term, def]) => (
+              <div key={term} className="rounded-xl border border-zim-ink-200 bg-white p-5">
+                <dt className="font-bold text-zim-ink-900">{term}</dt>
+                <dd className="mt-1 text-sm text-zim-ink-600">{def}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-6 text-sm text-zim-ink-600">
+            Want the developer view of these endpoints?{' '}
+            <Link to="/docs" className="font-semibold text-zim-red-700 hover:text-zim-red-800">Read the API docs →</Link>
+          </p>
+        </div>
+      </section>
+
+      <IntegrateCTA />
+    </div>
+  )
+}
+
+function MiniFact({ k, v }) {
+  return (
+    <div className="rounded-xl border border-zim-ink-200 bg-white p-4">
+      <p className="text-xs font-semibold uppercase tracking-wide text-zim-red-700">{k}</p>
+      <p className="mt-1 text-sm text-zim-ink-700">{v}</p>
     </div>
   )
 }

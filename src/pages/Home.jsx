@@ -35,13 +35,19 @@ export default function Home() {
               no fiscal-day state machine to manage — one simple API and a clean dashboard.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Link to="/signup" className="btn-primary py-3 text-base">Get started — free <ArrowRight size={16}/></Link>
-              <Link to="/sandbox" className="btn-secondary py-3 text-base">Try the sandbox</Link>
+              <Link to="/sandbox" className="btn-primary py-3 text-base">Try the sandbox <ArrowRight size={16}/></Link>
+              <a
+                href="https://wa.me/263774603865?text=Hi%20Noby%2C%20I%27d%20like%20to%20talk%20about%20ZIMRA%20fiscalisation%20(zimFDMS)."
+                target="_blank" rel="noopener noreferrer"
+                className="btn-secondary py-3 text-base"
+              >
+                Get in touch
+              </a>
             </div>
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs text-zim-ink-500">
-              <span>✓ No card required</span>
-              <span>✓ Works without ZIMRA credentials in sandbox</span>
-              <span>✓ WooCommerce plugin coming</span>
+              <span>✓ Free interactive sandbox</span>
+              <span>✓ No signup, no ZIMRA account needed</span>
+              <span>✓ Learn the real FDMS API v7.2</span>
             </div>
           </div>
 
@@ -173,12 +179,18 @@ export default function Home() {
           <div className="absolute -right-8 top-1/3 size-96 rounded-full bg-zim-red-400 blur-3xl"/>
         </div>
         <div className="container-page relative flex flex-col items-center text-center">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Ready to stop wrestling with FDMS?</h2>
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Want ZIMRA fiscalisation built into your system?</h2>
           <p className="mt-3 max-w-xl text-zim-red-50/90">
-            Sign up in 60 seconds with just your phone number. Test in sandbox forever — flip to live ZIMRA when you have your device.
+            Explore the whole FDMS lifecycle in the sandbox — no signup needed — then get in touch and I’ll help you integrate it into your POS, store or app.
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
-            <Link to="/signup" className="btn-gold py-3 text-base">Create my account <ArrowRight size={16}/></Link>
+            <a
+              href="https://wa.me/263774603865?text=Hi%20Noby%2C%20I%27d%20like%20to%20talk%20about%20ZIMRA%20fiscalisation%20(zimFDMS)."
+              target="_blank" rel="noopener noreferrer"
+              className="btn-gold py-3 text-base"
+            >
+              Get in touch <ArrowRight size={16}/>
+            </a>
             <Link to="/sandbox" className="btn-secondary !border-white/30 !bg-white/10 !text-white hover:!bg-white/20 py-3 text-base">Open the sandbox</Link>
           </div>
         </div>

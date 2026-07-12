@@ -42,8 +42,8 @@ export default function DemoDashboard() {
       {/* Demo banner */}
       <div className="bg-gradient-to-r from-zim-gold-400 to-zim-gold-500 text-zim-ink-900">
         <div className="container-page flex flex-wrap items-center justify-between gap-2 py-2 text-xs font-semibold">
-          <span className="flex items-center gap-1.5"><Eye size={12}/> Demo dashboard — what merchants see after signing in. Data is sample.</span>
-          <Link to="/signup" className="underline hover:no-underline">Create your real account →</Link>
+          <span className="flex items-center gap-1.5"><Eye size={12}/> Demo dashboard — a preview of what merchants will see. Data is sample.</span>
+          <a href="https://wa.me/263774603865?text=Hi%20Noby%2C%20I%27d%20like%20early%20access%20to%20zimFDMS." target="_blank" rel="noopener noreferrer" className="underline hover:no-underline">Get in touch →</a>
         </div>
       </div>
 
@@ -53,7 +53,7 @@ export default function DemoDashboard() {
           <Link to="/"><Logo /></Link>
           <div className="flex items-center gap-2">
             <Link to="/sandbox" className="btn-secondary text-xs"><ExternalLink size={12}/> Sandbox</Link>
-            <Link to="/signup" className="btn-primary text-xs">Sign up <ArrowRight size={12}/></Link>
+            <a href="https://wa.me/263774603865?text=Hi%20Noby%2C%20I%27d%20like%20early%20access%20to%20zimFDMS." target="_blank" rel="noopener noreferrer" className="btn-primary text-xs">Get in touch <ArrowRight size={12}/></a>
           </div>
         </div>
       </header>
@@ -104,9 +104,9 @@ export default function DemoDashboard() {
 
         <div className="mt-10 rounded-2xl bg-gradient-to-br from-zim-red-700 via-zim-red-600 to-zim-red-500 p-8 text-white">
           <h3 className="text-2xl font-bold">Like what you see?</h3>
-          <p className="mt-2 max-w-xl text-zim-red-50/90">This is exactly what your real dashboard looks like — with your real fiscalised receipts, your real fiscal day, your real Z reports.</p>
+          <p className="mt-2 max-w-xl text-zim-red-50/90">This is what your dashboard will look like — your fiscalised receipts, your fiscal day, your Z reports. Get in touch for early access when it goes live.</p>
           <div className="mt-5 flex flex-wrap gap-2">
-            <Link to="/signup" className="btn-gold text-base">Create my account <ArrowRight size={14}/></Link>
+            <a href="https://wa.me/263774603865?text=Hi%20Noby%2C%20I%27d%20like%20early%20access%20to%20zimFDMS." target="_blank" rel="noopener noreferrer" className="btn-gold text-base">Get in touch <ArrowRight size={14}/></a>
             <Link to="/sandbox" className="btn-secondary !bg-white/10 !border-white/30 !text-white hover:!bg-white/20">Run the POS sandbox</Link>
           </div>
         </div>

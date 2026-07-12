@@ -98,10 +98,9 @@ export default function Verify() {
             </p>
             <div className="mt-4 rounded-lg bg-zim-ink-50 p-4">
               <p className="text-[10px] font-semibold uppercase tracking-wider text-zim-ink-500">Try a sample</p>
-              <p className="mt-1 text-xs text-zim-ink-600">If you don't have a real reference yet, sign up as a merchant + submit a test receipt from your dashboard, then paste its invoice number here.</p>
+              <p className="mt-1 text-xs text-zim-ink-600">If you don't have a real reference yet, run a sale in the interactive sandbox to see how a fiscalised receipt and its QR are generated.</p>
               <div className="mt-3 flex flex-wrap gap-2">
-                <Link to="/signup" className="btn-primary text-xs">Create a merchant account</Link>
-                <Link to="/sandbox" className="btn-secondary text-xs">Try the sandbox</Link>
+                <Link to="/sandbox" className="btn-primary text-xs">Open the sandbox</Link>
               </div>
             </div>
           </div>

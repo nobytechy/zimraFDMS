@@ -48,21 +48,13 @@ export default function PublicLayout() {
                   isActive ? 'bg-zim-red-50 text-zim-red-700' : 'text-zim-ink-600 hover:bg-zim-ink-50 hover:text-zim-ink-900',
                 )}>{label}</NavLink>
             ))}
-            {!isAuthenticated && (
-              <>
-                <Link to="/login" className="ml-2 btn-secondary">Sign in</Link>
-                <Link to="/signup" className="btn-primary">Get started <ArrowRight size={14}/></Link>
-              </>
-            )}
-            {isAuthenticated && (
-              <>
-                <NavLink to="/dashboard" className={({ isActive }) => cn(
-                  'ml-2 inline-flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition',
-                  isActive ? 'bg-zim-red-50 text-zim-red-700' : 'text-zim-ink-600 hover:bg-zim-ink-50 hover:text-zim-ink-900',
-                )}><LayoutDashboard size={14}/> Dashboard</NavLink>
-                <button onClick={handleSignOut} className="btn-secondary"><LogOut size={14}/> Sign out</button>
-              </>
-            )}
+            <a
+              href="https://wa.me/263774603865?text=Hi%20Noby%2C%20I%27d%20like%20to%20talk%20about%20ZIMRA%20fiscalisation%20(zimFDMS)."
+              target="_blank" rel="noopener noreferrer"
+              className="btn-primary ml-2"
+            >
+              Get in touch <ArrowRight size={14}/>
+            </a>
           </nav>
           <button onClick={() => setOpen((v) => !v)} className="md:hidden btn-ghost" aria-label="Menu">
             {open ? <X size={20}/> : <Menu size={20}/>}
@@ -78,18 +70,14 @@ export default function PublicLayout() {
                     isActive ? 'bg-zim-red-50 text-zim-red-700' : 'text-zim-ink-700 hover:bg-zim-ink-50',
                   )}>{label}</NavLink>
               ))}
-              {!isAuthenticated && (
-                <>
-                  <Link to="/login" onClick={() => setOpen(false)} className="btn-secondary mt-1">Sign in</Link>
-                  <Link to="/signup" onClick={() => setOpen(false)} className="btn-primary">Get started</Link>
-                </>
-              )}
-              {isAuthenticated && (
-                <>
-                  <Link to="/dashboard" onClick={() => setOpen(false)} className="btn-secondary mt-1">Dashboard</Link>
-                  <button onClick={handleSignOut} className="btn-secondary">Sign out</button>
-                </>
-              )}
+              <a
+                href="https://wa.me/263774603865?text=Hi%20Noby%2C%20I%27d%20like%20to%20talk%20about%20ZIMRA%20fiscalisation%20(zimFDMS)."
+                target="_blank" rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="btn-primary mt-1"
+              >
+                Get in touch
+              </a>
             </div>
           </div>
         )}
@@ -126,9 +114,10 @@ export default function PublicLayout() {
               <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 backdrop-blur">
                 ZIMRA v7.2 compliant
               </span>
-              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 backdrop-blur">
-                Sibling of ManishaPay
-              </span>
+              <a href="https://manishapay.netlify.app" target="_blank" rel="noopener noreferrer"
+                 className="rounded-full border border-white/15 bg-white/5 px-3 py-1 backdrop-blur transition hover:border-zim-gold-300/50 hover:text-white">
+                Sibling of ManishaPay ↗
+              </a>
             </div>
           </div>
           <div>
@@ -138,14 +127,18 @@ export default function PublicLayout() {
               <li><Link to="/sandbox" className="hover:text-white">Sandbox</Link></li>
               <li><Link to="/docs" className="hover:text-white">Docs</Link></li>
               <li><Link to="/pricing" className="hover:text-white">Pricing</Link></li>
+              <li>
+                <a href="https://manishapay.netlify.app" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                  Payments · ManishaPay ↗
+                </a>
+              </li>
             </ul>
           </div>
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-zim-gold-300">Company</p>
             <ul className="space-y-2 text-sm text-zim-ink-300">
               <li><a href="https://nobie.netlify.app" target="_blank" rel="noopener noreferrer" className="hover:text-white">About Noby</a></li>
-              <li><Link to="/admin/login" className="hover:text-white">Staff login</Link></li>
-              <li><Link to="/signup" className="hover:text-white">Become a merchant</Link></li>
+              <li><Link to="/sandbox" className="hover:text-white">Try the sandbox</Link></li>
               <li><a href="mailto:nobytechy@gmail.com" className="hover:text-white">Get in touch</a></li>
             </ul>
           </div>

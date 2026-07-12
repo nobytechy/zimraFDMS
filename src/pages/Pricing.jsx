@@ -19,15 +19,15 @@ const TIERS = [
   {
     name: 'Starter',
     price: 'Free',
-    sub: 'For pilot deployments.',
+    sub: 'Early access — join the waitlist.',
     features: [
-      'Connect your live ZIMRA device',
+      'Connect your live ZIMRA device (coming)',
       'Up to 200 fiscalised receipts / month',
       'WhatsApp + email support',
-      'WordPress / WooCommerce plugin',
+      'WordPress / WooCommerce plugin (coming)',
     ],
-    cta: 'Create account',
-    ctaLink: '/signup',
+    cta: 'Join the waitlist',
+    ctaLink: 'https://wa.me/263774603865?text=Hi%20Noby%2C%20please%20add%20me%20to%20the%20zimFDMS%20Starter%20waitlist.',
     highlight: true,
   },
   {

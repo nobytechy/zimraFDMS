@@ -20,7 +20,7 @@ const FAQS = [
   },
   {
     q: 'What happens when the internet drops mid-day?',
-    a: 'zimFDMS uses ZIMRA\'s offline mode. Receipts queue locally; when connectivity returns they\'re submitted as a batch file per the spec. Your customers get a real receipt either way — fiscalisation happens in the background.',
+    a: 'ZIMRA\'s spec allows an offline mode — receipts are stored on the device and submitted as a batch file once connectivity returns, so the customer always gets a receipt. zimFDMS is being built to handle this automatically (on our roadmap); the how-it-works page explains exactly how the online and offline modes differ.',
   },
   {
     q: 'Is my data exportable?',

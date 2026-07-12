@@ -1,4 +1,11 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
+
+// Accounts (merchant signup/login/dashboard + super-admin) are gated OFF for
+// the education-only launch: zimFDMS is a learn-FDMS + interactive sandbox +
+// lead-gen site, so no real user data or admin surface is exposed publicly.
+// Defaults to off (env var absent) — flip VITE_ACCOUNTS_ENABLED=true once the
+// real ZIMRA engine + a hardened admin login are in place.
+const ACCOUNTS_ENABLED = import.meta.env.VITE_ACCOUNTS_ENABLED === 'true'
 
 import PublicLayout from '@/components/layout/PublicLayout'
 import DashboardLayout from '@/components/layout/DashboardLayout'
@@ -46,27 +53,39 @@ export default function App() {
       {/* Public demo dashboard — no auth, seeded data */}
       <Route path="/demo-dashboard" element={<DemoDashboard />} />
 
-      {/* Auth */}
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/login"  element={<Login />} />
+      {ACCOUNTS_ENABLED ? (
+        <>
+          {/* Auth */}
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login"  element={<Login />} />
 
-      {/* Merchant dashboard */}
-      <Route path="/dashboard" element={<MerchantRoute><DashboardLayout /></MerchantRoute>}>
-        <Route index            element={<Overview />} />
-        <Route path="receipts"  element={<Receipts />} />
-        <Route path="fiscal-day" element={<FiscalDay />} />
-        <Route path="api-keys"  element={<ApiKeys />} />
-        <Route path="webhooks"  element={<Webhooks />} />
-        <Route path="settings"  element={<Settings />} />
-      </Route>
+          {/* Merchant dashboard */}
+          <Route path="/dashboard" element={<MerchantRoute><DashboardLayout /></MerchantRoute>}>
+            <Route index            element={<Overview />} />
+            <Route path="receipts"  element={<Receipts />} />
+            <Route path="fiscal-day" element={<FiscalDay />} />
+            <Route path="api-keys"  element={<ApiKeys />} />
+            <Route path="webhooks"  element={<Webhooks />} />
+            <Route path="settings"  element={<Settings />} />
+          </Route>
 
-      {/* Super-admin */}
-      <Route path="/admin/login" element={<AdminLogin />} />
-      <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
-        <Route index             element={<AdminOverview />} />
-        <Route path="merchants"  element={<AdminMerchants />} />
-        <Route path="settings"   element={<AdminSettings />} />
-      </Route>
+          {/* Super-admin */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
+            <Route index             element={<AdminOverview />} />
+            <Route path="merchants"  element={<AdminMerchants />} />
+            <Route path="settings"   element={<AdminSettings />} />
+          </Route>
+        </>
+      ) : (
+        <>
+          {/* Accounts gated off for the education-only launch → send to home */}
+          <Route path="/signup"    element={<Navigate to="/" replace />} />
+          <Route path="/login"     element={<Navigate to="/" replace />} />
+          <Route path="/dashboard/*" element={<Navigate to="/" replace />} />
+          <Route path="/admin/*"   element={<Navigate to="/" replace />} />
+        </>
+      )}
 
       <Route path="*" element={<NotFound />} />
     </Routes>
