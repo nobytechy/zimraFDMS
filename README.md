@@ -110,3 +110,9 @@ Super-admin (AdminRoute + AdminLayout)
 ## License
 
 Proprietary. © Noby Tebulo — [nobie.netlify.app](https://nobie.netlify.app)
+
+## Screenshots
+
+![zimfdms](docs/screenshots/zimfdms.jpg)
+
+**Live:** https://zimrafdms.netlify.app · Built by [Noby Tebulo](https://nobie.netlify.app)
