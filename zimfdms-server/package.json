@@ -1,0 +1,15 @@
+{
+  "name": "zimfdms-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Server-side ZIMRA FDMS v7.2 core + local simulator for zimFDMS",
+  "scripts": {
+    "test": "node --test test/core.test.js test/e2e.test.js",
+    "sim": "node src/sim/cli.js"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@peculiar/x509": "^1.12.3"
+  }
+}
