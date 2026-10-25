@@ -22,6 +22,14 @@ import Seo from '@/components/Seo'
 
 const DEVICE_ID = 1042
 
+
+/** ZIMRA wants LOCAL zone-less time (Africa/Harare), not UTC (spec 4.6). */
+const localNow = () => {
+  const p = new Intl.DateTimeFormat('en-CA', { timeZone: 'Africa/Harare', hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).formatToParts(new Date())
+  const g = (t) => p.find((x) => x.type === t).value
+  return `${g('year')}-${g('month')}-${g('day')}T${g('hour')}:${g('minute')}:${g('second')}`
+}
+
 export default function Sandbox() {
   const [client] = useState(() => createClient({ mode: 'demo', deviceID: DEVICE_ID }))
   const [view, setView] = useState('cashier')     // 'cashier' | 'developer'
@@ -78,7 +86,7 @@ export default function Sandbox() {
         const r = await client.registerDevice({ deviceSerialNo: `SN-${DEVICE_ID}`, certificateRequest: '(mock CSR)' })
         log('registerDevice', true, r)
       }
-      const r = await client.openDay({ fiscalDayOpened: new Date().toISOString() })
+      const r = await client.openDay({ fiscalDayOpened: localNow() })
       if (r.error) { log('openDay', false, r); toast.error(r.message); return }
       log('openDay', true, r)
       toast.success(`Till open · fiscal day ${r.fiscalDayNo}`)
@@ -93,7 +101,7 @@ export default function Sandbox() {
     }
     setBusy(true)
     try {
-      const r = await client.closeDay({ fiscalDayClosed: new Date().toISOString() })
+      const r = await client.closeDay({ fiscalDayClosed: localNow() })
       if (r.error) { log('closeDay', false, r); toast.error(r.message); return }
       log('closeDay', true, r)
       setZReportOpen(true)
@@ -131,7 +139,7 @@ export default function Sandbox() {
         receiptType: 'FiscalInvoice', receiptCurrency: 'USD',
         receiptCounter: counter, receiptGlobalNo: counter,
         invoiceNo: `INV-${Date.now().toString().slice(-6)}`,
-        receiptDate: new Date().toISOString().slice(0, 19),
+        receiptDate: localNow(),
         receiptLinesTaxInclusive: true,
         receiptLines: lines, receiptTaxes: taxes,
         receiptPayments: [{ moneyTypeCode: method, paymentAmount: total }],

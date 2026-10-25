@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { Save } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/lib/supabase'
 
@@ -49,7 +50,7 @@ export default function Settings() {
           </div>
         </div>
         <div className="rounded-xl border border-zim-ink-200 bg-zim-ink-50 p-4 text-xs text-zim-ink-600">
-          <strong className="text-zim-ink-900">ZIMRA device details</strong> are set by the platform admin in this build. Once you have your own ZIMRA device ID + activation key from the ZIMRA portal, ask the admin to attach them — your receipts will start fiscalising live.
+          <strong className="text-zim-ink-900">ZIMRA device:</strong> connect your own device ID and activation key from the <Link to="/dashboard/connect" className="font-semibold text-zim-red-700">Device</Link> page. Keys are created and kept on the server — never in your browser.
         </div>
         <button type="submit" disabled={busy} className="btn-primary">
           {busy ? 'Saving…' : <><Save size={14}/> Save</>}

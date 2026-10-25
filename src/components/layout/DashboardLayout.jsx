@@ -1,5 +1,5 @@
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { LogOut, LayoutDashboard, Receipt, CalendarDays, Settings, Key, Webhook, ExternalLink } from 'lucide-react'
+import { LogOut, LayoutDashboard, Receipt, CalendarDays, Settings, Key, Webhook, PlugZap, ExternalLink } from 'lucide-react'
 import { useAuth } from '@/context/AuthContext'
 import { cn } from '@/lib/utils'
 import Logo from '@/components/Logo'
@@ -8,6 +8,7 @@ const LINKS = [
   { to: '/dashboard',            label: 'Overview',    icon: LayoutDashboard, end: true },
   { to: '/dashboard/receipts',   label: 'Receipts',    icon: Receipt },
   { to: '/dashboard/fiscal-day', label: 'Fiscal day',  icon: CalendarDays },
+  { to: '/dashboard/connect',     label: 'Device',      icon: PlugZap },
   { to: '/dashboard/api-keys',   label: 'API keys',    icon: Key },
   { to: '/dashboard/webhooks',   label: 'Webhooks',    icon: Webhook },
   { to: '/dashboard/settings',   label: 'Settings',    icon: Settings },

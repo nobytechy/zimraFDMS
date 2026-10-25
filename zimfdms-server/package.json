@@ -5,11 +5,17 @@
   "type": "module",
   "description": "Server-side ZIMRA FDMS v7.2 core + local simulator for zimFDMS",
   "scripts": {
-    "test": "node --test test/core.test.js test/e2e.test.js",
+    "test": "node --test test/core.test.js test/e2e.test.js test/pg.test.js test/api.test.js",
     "sim": "node src/sim/cli.js"
   },
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
-    "@peculiar/x509": "^1.12.3"
+    "@peculiar/x509": "^1.12.3",
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.11"
   }
 }

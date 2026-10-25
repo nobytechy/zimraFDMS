@@ -51,8 +51,8 @@ npm run dev                     # http://localhost:5180
 1. Run `supabase/install.sql` in the Supabase SQL Editor. Idempotent.
 2. Create the admin auth user manually:
    - **Auth → Users → Add user**
-   - email: `admin@zimfdms.local`
-   - password: `1975` (PIN — change later from the admin UI)
+   - email: `admin@zimfdms.app`
+   - password: a strong password you choose (never commit it)
    - auto-confirm: yes
 3. Link the auth user to a merchant row marked admin (SQL inside `install.sql`).
 
@@ -79,10 +79,10 @@ Merchant (MerchantRoute + DashboardLayout)
   /dashboard/settings      business details
 
 Super-admin (AdminRoute + AdminLayout)
-  /admin/login             PIN-only
+  /admin/login             admin password
   /admin                   platform overview
   /admin/merchants         all merchants
-  /admin/settings          paste ZIMRA device credentials here
+  /admin/settings          platform on/off switch (ZIMRA credentials are per merchant: Dashboard → Device)
 ```
 
 ---
@@ -95,7 +95,7 @@ Super-admin (AdminRoute + AdminLayout)
 - [x] Spec test vectors from page 73 (`src/lib/fdms/testVectors.js`)
 - [x] Public landing + How It Works + Sandbox + Docs + Pricing pages
 - [x] Merchant auth flow (phone + password) + dashboard skeleton
-- [x] Super-admin PIN login + platform settings page
+- [x] Super-admin login + platform settings page
 
 ## What's coming
 

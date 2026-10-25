@@ -6,6 +6,7 @@ import { Toaster } from 'react-hot-toast'
 import './index.css'
 import App from './App'
 import { AuthProvider } from '@/context/AuthContext'
+import { DeviceProvider } from '@/context/DeviceContext'
 import PageLoader from '@/components/PageLoader'
 
 createRoot(document.getElementById('root')).render(
@@ -13,8 +14,10 @@ createRoot(document.getElementById('root')).render(
     <HelmetProvider>
       <BrowserRouter>
         <AuthProvider>
-          <PageLoader />
-          <App />
+          <DeviceProvider>
+            <PageLoader />
+            <App />
+          </DeviceProvider>
         </AuthProvider>
         <Toaster
           position="top-right"

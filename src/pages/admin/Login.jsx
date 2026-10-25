@@ -12,11 +12,11 @@ export default function AdminLogin() {
 
   async function onSubmit(e) {
     e.preventDefault()
-    if (pin.length < 4) { toast.error('Enter your PIN'); return }
+    if (pin.length < 8) { toast.error('Enter your admin password (8+ characters)'); return }
     setBusy(true)
     const { error } = await signInAdmin(pin)
     setBusy(false)
-    if (error) { toast.error('Wrong PIN'); return }
+    if (error) { toast.error('Wrong password'); return }
     nav('/admin')
   }
 
@@ -26,10 +26,10 @@ export default function AdminLogin() {
         <div className="mb-6 text-center"><Logo mono /></div>
         <form onSubmit={onSubmit} className="rounded-2xl bg-white p-7 shadow-2xl">
           <h1 className="text-2xl font-bold tracking-tight text-zim-ink-900">Super-admin</h1>
-          <p className="mt-1 text-sm text-zim-ink-500">PIN-only access. For Noby.</p>
+          <p className="mt-1 text-sm text-zim-ink-500">Admin access only.</p>
           <input
-            autoFocus type="password" inputMode="numeric"
-            value={pin} onChange={(e) => setPin(e.target.value.replace(/\D/g, ''))}
+            autoFocus type="password"
+            value={pin} onChange={(e) => setPin(e.target.value)}
             className="input mt-6 text-center text-2xl font-bold tracking-[0.4em]"
             placeholder="••••" maxLength={8}
           />

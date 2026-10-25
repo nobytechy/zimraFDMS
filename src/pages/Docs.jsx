@@ -29,16 +29,14 @@ export default function Docs() {
           <article className="prose prose-slate max-w-none">
             <Section id="getting-started" title="Getting started">
               <ol>
-                <li>The hosted API is in <strong>private preview</strong> — <a href="#integrate">get in touch</a> for early access and an API key.</li>
-                <li>Use your key as a Bearer token on every request.</li>
-                <li>Meanwhile, walk the whole lifecycle in the <Link to="/sandbox">interactive sandbox</Link> — no signup, no ZIMRA account needed.</li>
+                <li><Link to="/signup">Create an account</Link> and open <strong>Dashboard → Device</strong>.</li>
+                <li>Enter your own ZIMRA device ID, serial number and activation key. We verify your business with ZIMRA, then register your device.</li>
+                <li>Open a fiscal day and ring up sales. Not ready? Walk the lifecycle in the <Link to="/sandbox">interactive sandbox</Link> — no signup, no ZIMRA account needed.</li>
               </ol>
-              <pre><code>{`curl https://api.zimfdms.co.zw/v1/ping \\
-  -H 'Authorization: Bearer zfd_live_xxxxxxxxxxxxxxxx'`}</code></pre>
               <p className="rounded-lg border border-zim-gold-300 bg-zim-gold-50 px-4 py-3 text-sm text-zim-ink-700">
-                <strong>Heads up —</strong> the hosted zimFDMS API is currently in <strong>private preview</strong>.
-                Want early access, or fiscalisation built into your own system? <a href="#integrate">Get in touch</a> and
-                we’ll set you up.
+                <strong>Each business uses its own ZIMRA device.</strong> Your sales are signed with your device’s key, which is created and
+                kept on our server — it never reaches the browser. Start on the <strong>Test</strong> ZIMRA system before going Live.
+                Want fiscalisation built into your own system? <a href="#integrate">Get in touch</a>.
               </p>
             </Section>
 
@@ -78,7 +76,7 @@ export default function Docs() {
               <p><strong>Trading — the daily cycle</strong></p>
               <ul>
                 <li><code>openDay</code> — open a fiscal day (only when the previous one is <code>FiscalDayClosed</code>; the day number increments by one)</li>
-                <li><code>submitReceipt</code> — submit each fiscal invoice / credit / debit note, <strong>device-signed</strong>; FDMS counter-signs and returns its own signature + QR data</li>
+                <li><code>submitReceipt</code> — submit each fiscal invoice / credit / debit note, <strong>device-signed</strong>; FDMS counter-signs and returns its own signature; the device builds the receipt QR from its own signature</li>
                 <li><code>closeDay</code> — close the day with summary counters. Processing is asynchronous → <code>FiscalDayClosed</code> or <code>FiscalDayCloseFailed</code> (correct &amp; resubmit)</li>
               </ul>
               <p><strong>Offline mode &amp; utilities</strong></p>
@@ -107,55 +105,43 @@ export default function Docs() {
               </p>
             </Section>
 
-            <Section id="submit-receipt" title="POST /v1/receipts">
-              <p>Submit a sale to ZIMRA. The endpoint accepts a flat JSON body — we calculate fiscal counters, sign the receipt, and return the FDMS-signed result with a QR URL.</p>
-              <pre><code>{`POST https://api.zimfdms.co.zw/v1/receipts
-Authorization: Bearer zfd_live_xxxxxxxxxxxxxxxx
+            <Section id="submit-receipt" title="Submitting a sale">
+              <p>The dashboard (and, soon, your own system) sends only the items and payment. The server numbers the receipt, signs it with your device key, sends it to ZIMRA and returns the result. If ZIMRA is unreachable the sale is saved and sent later, in order.</p>
+              <pre><code>{`POST /api/fdms/devices/{deviceID}/sell
+Authorization: Bearer <your session token>
 Content-Type: application/json
 
 {
-  "receiptType": "FiscalInvoice",
-  "receiptCurrency": "USD",
   "invoiceNo": "INV-00134",
-  "buyer": { "buyerRegisterName": "Tendai Moyo", "buyerTIN": "1234567890" },
+  "receiptCurrency": "USD",
   "lines": [
-    { "name": "Coca-Cola 500ml", "quantity": 2, "price": 1.20, "taxID": 1 },
-    { "name": "Beef pie",        "quantity": 1, "price": 2.50, "taxID": 1 }
+    { "name": "Coca-Cola 500ml", "quantity": 2, "price": 1.20, "taxID": 3 }
   ],
-  "payments": [{ "type": "Cash", "amount": 4.90 }]
+  "payments": [{ "moneyTypeCode": "Cash" }]
 }`}</code></pre>
-              <p>Response:</p>
+              <p>Response (shape):</p>
               <pre><code>{`{
-  "receiptId": 1000045,
-  "receiptGlobalNo": 134,
-  "fdmsSignature": { "hash": "...", "signature": "..." },
-  "qrUrl": "https://invoice-verification.zimra.co.zw/1042/20260520/0000000134/aBcD...",
-  "fiscalDayNo": 142,
-  "status": "accepted"
+  "ok": true,
+  "data": {
+    "status": "accepted",          // or "queued" when ZIMRA could not be reached
+    "receiptID": 1000045,
+    "receipt": { "receiptGlobalNo": 134, "receiptCounter": 3, "receiptTotal": 2.40, ... },
+    "qr": { "url": "https://.../<deviceID><date><globalNo><code>", "verificationCode": "A1B2-C3D4-E5F6-7890" }
+  }
 }`}</code></pre>
+              <p>Tax IDs come from your device configuration (<code>GET /api/fdms/devices/{'{deviceID}'}</code> → <code>config.applicableTaxes</code>).</p>
             </Section>
 
             <Section id="fiscal-day" title="Fiscal day endpoints">
-              <p>zimFDMS opens and closes fiscal days automatically. You only need to call these if you want manual control.</p>
               <ul>
-                <li><code>POST /v1/fiscal-day/open</code> — open the current day</li>
-                <li><code>POST /v1/fiscal-day/close</code> — close + emit Z report</li>
-                <li><code>GET  /v1/fiscal-day/current</code> — current day status + counters</li>
-                <li><code>GET  /v1/fiscal-day/:id/z-report</code> — full Z report (JSON or PDF)</li>
+                <li><code>POST /api/fdms/devices/{'{id}'}/open-day</code> — open the next fiscal day</li>
+                <li><code>POST /api/fdms/devices/{'{id}'}/close-day</code> — close the day (all receipts must have reached ZIMRA first)</li>
+                <li><code>GET  /api/fdms/devices/{'{id}'}/days/{'{no}'}</code> — a day with all its receipts</li>
+                <li><code>GET  /api/fdms/devices/{'{id}'}/receipts?q=&amp;status=&amp;from=&amp;to=</code> — search receipts by invoice number, status, type and date range</li>
               </ul>
             </Section>
 
-            <Section id="webhooks" title="Webhooks">
-              <p>Configure a webhook URL in <code>Dashboard → Webhooks</code>. We POST signed JSON to it on these events:</p>
-              <ul>
-                <li><code>receipt.submitted</code></li>
-                <li><code>receipt.accepted</code></li>
-                <li><code>receipt.failed</code></li>
-                <li><code>fiscal_day.opened</code></li>
-                <li><code>fiscal_day.closed</code></li>
-              </ul>
-              <p>Each delivery includes an <code>X-zimFDMS-Signature</code> header — HMAC-SHA256 of the body, signed with your webhook secret.</p>
-            </Section>
+            
 
             <Section id="sdks" title="SDKs">
               <ul>
@@ -166,15 +152,16 @@ Content-Type: application/json
             </Section>
 
             <Section id="errors" title="Errors">
-              <p>Every error returns a JSON body shaped <code>{`{ code, message, details? }`}</code> with a matching HTTP status.</p>
+              <p>Our API answers <code>{`{ "ok": false, "error": { "code", "message" } }`}</code>. Errors from ZIMRA keep ZIMRA’s own code (for example <code>DEV01</code>–<code>DEV15</code>, <code>RCPT…</code>, <code>FISC…</code>, <code>FILE…</code> — see the ZIMRA spec for the full list).</p>
               <table>
                 <thead><tr><th>Code</th><th>Meaning</th></tr></thead>
                 <tbody>
-                  <tr><td>DEV01</td><td>Device not active</td></tr>
-                  <tr><td>RCPT011</td><td>receiptCounter out of order</td></tr>
-                  <tr><td>RCPT012</td><td>receiptGlobalNo out of order</td></tr>
-                  <tr><td>RCPT019</td><td>receiptTotal mismatch with lines</td></tr>
-                  <tr><td>DAY01</td><td>Fiscal day in wrong status for this action</td></tr>
+                  <tr><td>UNAUTHENTICATED</td><td>Sign in again</td></tr>
+                  <tr><td>DEVICE_OWNED</td><td>That device is already connected to another account</td></tr>
+                  <tr><td>DAY_NOT_OPEN</td><td>Open the fiscal day first</td></tr>
+                  <tr><td>PREFLIGHT_FAILED</td><td>We stopped a receipt ZIMRA would reject; details say which rule</td></tr>
+                  <tr><td>UNSENT_RECEIPTS</td><td>Some sales have not reached ZIMRA yet</td></tr>
+                  <tr><td>FDMS_UNREACHABLE</td><td>ZIMRA could not be reached; sales are kept and sent later</td></tr>
                 </tbody>
               </table>
             </Section>

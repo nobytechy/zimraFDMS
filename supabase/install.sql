@@ -166,7 +166,7 @@ create policy "platform settings admin" on public.fdms_platform_settings
 -- After running this script:
 --   1. Supabase → Auth → Users → Add user
 --        email:    admin@zimfdms.app
---        password: 1975              (PIN — change later)
+--        password: <choose a strong password — never commit it>
 --        auto-confirm: yes
 --   2. Link the auth user to a merchant row marked as admin:
 --        insert into public.fdms_merchants (user_id, full_name, phone, is_admin)

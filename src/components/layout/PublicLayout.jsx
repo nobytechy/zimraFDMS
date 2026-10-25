@@ -48,10 +48,21 @@ export default function PublicLayout() {
                   isActive ? 'bg-zim-red-50 text-zim-red-700' : 'text-zim-ink-600 hover:bg-zim-ink-50 hover:text-zim-ink-900',
                 )}>{label}</NavLink>
             ))}
+            {isAuthenticated ? (
+              <>
+                <Link to="/dashboard" className="ml-2 rounded-md px-3 py-2 text-sm font-semibold text-zim-red-700 hover:bg-zim-red-50"><LayoutDashboard size={14} className="mr-1 inline"/>Dashboard</Link>
+                <button onClick={handleSignOut} className="rounded-md px-3 py-2 text-sm font-medium text-zim-ink-600 hover:bg-zim-ink-50"><LogOut size={14} className="mr-1 inline"/>Sign out</button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="ml-2 rounded-md px-3 py-2 text-sm font-medium text-zim-ink-700 hover:bg-zim-ink-50">Log in</Link>
+                <Link to="/signup" className="btn-primary">Sign up</Link>
+              </>
+            )}
             <a
               href="https://wa.me/263774603865?text=Hi%20Noby%2C%20I%27d%20like%20to%20talk%20about%20ZIMRA%20fiscalisation%20(zimFDMS)."
               target="_blank" rel="noopener noreferrer"
-              className="btn-primary ml-2"
+              className="btn-secondary ml-2"
             >
               Get in touch <ArrowRight size={14}/>
             </a>
@@ -70,6 +81,17 @@ export default function PublicLayout() {
                     isActive ? 'bg-zim-red-50 text-zim-red-700' : 'text-zim-ink-700 hover:bg-zim-ink-50',
                   )}>{label}</NavLink>
               ))}
+              {isAuthenticated ? (
+                <>
+                  <Link to="/dashboard" onClick={() => setOpen(false)} className="btn-primary mt-1">Dashboard</Link>
+                  <button onClick={handleSignOut} className="btn-secondary">Sign out</button>
+                </>
+              ) : (
+                <>
+                  <Link to="/signup" onClick={() => setOpen(false)} className="btn-primary mt-1">Sign up</Link>
+                  <Link to="/login" onClick={() => setOpen(false)} className="btn-secondary">Log in</Link>
+                </>
+              )}
               <a
                 href="https://wa.me/263774603865?text=Hi%20Noby%2C%20I%27d%20like%20to%20talk%20about%20ZIMRA%20fiscalisation%20(zimFDMS)."
                 target="_blank" rel="noopener noreferrer"

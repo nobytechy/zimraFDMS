@@ -60,6 +60,12 @@ export class DeviceService {
     const probe = { deviceID, baseUrl }
     const taxpayer = await this._client(probe, { withCert: false }).verifyTaxpayerInformation({ activationKey, deviceSerialNo: serialNo })
     await this.store.lock(deviceID, async () => {
+      // Ownership guard: a deviceID belongs to ONE merchant; a registered device is never overwritten.
+      const existing = await this.store.get(deviceID)
+      if (existing) {
+        if (existing.merchantId !== merchantId) throw new BridgeError('DEVICE_OWNED', `Device ${deviceID} is already connected to another account`)
+        if (existing.state === 'registered') throw new BridgeError('ALREADY_REGISTERED', `Device ${deviceID} is already registered`)
+      }
       await this.store.put(deviceID, {
         deviceID, merchantId, env, baseUrl, serialNo, state: 'connected',
         activationKeySealed: seal(activationKey, this.masterKey),
